@@ -1,0 +1,8 @@
+cff-version: 1.2.0
+title: Columbia Corridor Research
+message: If you use this dataset or method, please cite the repository and the public-source data providers.
+type: dataset
+authors:
+  - family-names: Valentine
+    given-names: David
+license: CC0-1.0

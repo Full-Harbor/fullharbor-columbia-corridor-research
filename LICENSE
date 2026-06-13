@@ -1,0 +1,4 @@
+Unless otherwise noted:
+- Code in `scripts/`, `config/`, and `tests/` is released under MIT.
+- Curated CSV exports and prose documentation in this publish tree are released under CC0 1.0.
+- Upstream public-source terms still apply to the underlying IRS and GivingTuesday source lineage.
