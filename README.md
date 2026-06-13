@@ -33,8 +33,9 @@ Centerline -> distance bands -> IRS EO BMF org universe -> ZIP geocode -> NTEE c
 
 ## License and Citation
 
-- Code in `scripts/`, `config/`, and `tests/`: MIT
-- Data and documentation: CC0 1.0
+- Public-source here means built from public filings and documents, not that every file is public-domain.
+- Code in `scripts/`: MIT (`LICENSE`)
+- Data and documentation: CC0 1.0 (`LICENSE-DATA`)
 - Citation metadata: `CITATION.cff`
 
 See `METHOD.md`, `DATA_DICTIONARY.md`, `LIMITATIONS.md`, `CHANGELOG.md`, and `ROADMAP.md` for details.
