@@ -1,0 +1,85 @@
+# Columbia Corridor — NTEE → sector crosswalk
+# v1.1 reconstruction (2026-06-15)
+#
+# WHY THIS FILE EXISTS
+# The original config/ directory was never committed to the public repo, so
+# scripts/P3_sectors_updated.py could not be reproduced end-to-end. This file
+# restores a runnable crosswalk and corrects the NTEE letter scramble that put
+# Civil Rights (R) organizations under "Science & Technology" — R is Civil
+# Rights / Social Action / Advocacy; Science & Technology is U.
+#
+# DESIGN RULES (aligned to the semantic gates in P3_sectors_updated.py)
+#   - NTEE D (animal-related) must NOT map to Water/Fisheries. Aquatic work is
+#     routed via C32 (water resources / wetlands), not D codes.
+#   - NTEE X (religion-related) may map to Tribal Nations or Religion only.
+#   - Blank ntee_code stays 'unknown' (documented source absence, handled in
+#     code, not here).
+#   - Matching is on the FULL NTEE code (exact string). Anything not listed
+#     falls back to the low-alignment bucket below.
+#
+# REVIEW BEFORE TRUSTING
+#   The code lists and mission_affinity values are an editorial reconstruction,
+#   not the original (which was never published). Run P3 to confirm the
+#   distribution gates pass before treating this as authoritative.
+#
+# KNOWN LIMITATION — Environmental Justice
+#   EJ has no clean NTEE code; in the corridor work it is a curated, EIN-keyed
+#   override (e.g. Comunidades, EIN 99-3058305, NTEE R22). P3 maps by NTEE code
+#   only, so EJ cannot be populated from this file alone. By code, R22 resolves
+#   to Advocacy below; promoting specific EINs to EJ needs a separate override
+#   join (tracked for v1.1).
+
+fallback_sector: "General Support / Low Mission Alignment"
+fallback_affinity: 0.2
+
+sectors:
+  environment_conservation:
+    display_name: "Environment & Conservation"
+    mission_affinity: 0.90
+    ntee_codes: [C00, C01, C02, C03, C05, C11, C12, C19, C20, C27, C30, C34, C36, C40, C41, C42, C50, C60, C99]
+
+  water_fisheries:
+    display_name: "Water, Fisheries & Aquatic Resources"
+    mission_affinity: 1.00
+    # Aquatic resources routed through environment codes, NOT animal (D) codes.
+    ntee_codes: [C32]
+
+  climate_energy:
+    display_name: "Climate, Energy & Infrastructure"
+    mission_affinity: 0.85
+    ntee_codes: [C35]
+
+  tribal_nations:
+    display_name: "Tribal Nations & Indigenous Governance"
+    mission_affinity: 0.90
+    ntee_codes: [X20, X21, X22, X30, X80, X99]
+
+  advocacy_civic:
+    display_name: "Advocacy, Policy & Civic Engagement"
+    mission_affinity: 0.80
+    # R = Civil Rights, Social Action & Advocacy (corrected from the scramble).
+    ntee_codes: [R20, R22, R23, R24, R25, R26, R27, R28, R29, R30, R40, R60, R61, R62, R63, R67, W24, S20]
+
+  public_health:
+    display_name: "Public Health & Community Wellbeing"
+    mission_affinity: 0.60
+    ntee_codes: [E01, E20, E21, E30, E32, E40, E42, E70, E86, E99, F20, F30, F32, F40, F60, G30, G40, G90]
+
+  agriculture_rural:
+    display_name: "Agriculture, Rural Development & Ranching"
+    mission_affinity: 0.60
+    # K = Food, Agriculture & Nutrition (corrected); rural community-improvement.
+    ntee_codes: [K20, K25, K26, K28, K30, K34, K35, K40, K99, S30, S31, S32]
+
+  science_research:
+    display_name: "Science, Research & Data"
+    mission_affinity: 0.55
+    # U = Science & Technology, V = Social Science (the true home for research).
+    ntee_codes: [U20, U21, U30, U33, U40, U41, U99, V20, V22, V24, V99]
+
+  environmental_justice:
+    display_name: "Environmental Justice & Community Health"
+    mission_affinity: 0.95
+    # No clean NTEE code maps here; populated via a separate EIN-keyed override
+    # (see header note). Seed: Comunidades, EIN 99-3058305.
+    ntee_codes: []
